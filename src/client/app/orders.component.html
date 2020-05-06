@@ -1,0 +1,34 @@
+<div>
+  <ul class="heroes">
+    <li *ngFor="let order of orders" (click)="onSelect(order)" [class.selected]="order === selectedOrder">
+      <button class="delete-button" (click)="deleteOrder(order)">Delete</button>
+      <div class="hero-element">
+        <div class="badge">{{order.orderid}}</div>
+        <div class="name">{{order.price}}</div>
+        <div class="saying">{{order.customer[firstName]}}</div>
+      </div>
+    </li>
+  </ul>
+  <div class="editarea">
+    <button (click)="enableAddMode()">Add new Order</button>
+    <div *ngIf="selectedOrder">
+      <div class="editfields">
+        <div>
+          <label>id: </label>
+          <input [(ngModel)]="selectedOrder.orderid" placeholder="id" *ngIf="addingOrder" />
+          <label *ngIf="!addingOrder" class="value">{{selectedOrder.orderid}}</label>
+        </div>
+        <div>
+          <label>price: </label>
+          <input [(ngModel)]="selectedOrder.price" placeholder="price" />
+        </div>
+        <div>
+          <label>name: </label>
+          <input [(ngModel)]="selectedOrder.customer[firstName]" placeholder="name" />
+        </div>
+      </div>
+      <button (click)="cancel()">Cancel</button>
+      <button (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
